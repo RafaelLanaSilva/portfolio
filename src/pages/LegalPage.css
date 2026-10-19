@@ -1,0 +1,19 @@
+.legal-page { max-width: 52rem; margin: 0 auto; padding: 3rem 1.25rem 5rem; }
+.legal-back { display: inline-flex; align-items: center; gap: .5rem; color: var(--glow-a); font-size: .875rem; }
+.legal-eyebrow { margin-top: 3rem; color: var(--glow-a); font: .7rem 'Geist Mono', monospace; letter-spacing: .12em; }
+.legal-page h1 { margin-top: 1rem; font-size: clamp(2.25rem, 6vw, 3.75rem); line-height: 1.1; font-weight: 600; letter-spacing: -.04em; }
+.legal-intro { margin-top: 1.25rem; color: var(--muted-foreground); font-size: 1.1rem; }
+.legal-date { margin-top: 1rem; color: var(--muted-foreground); font-size: .8rem; }
+.legal-index { display: flex; flex-wrap: wrap; gap: .65rem 1.25rem; margin: 2rem 0; padding: 1.25rem; border: 1px solid var(--border); border-radius: 1rem; font-size: .8rem; }
+.legal-section { padding: 1.75rem 0; border-top: 1px solid var(--border); scroll-margin-top: 1rem; }
+.legal-section h2 { font-size: 1.25rem; font-weight: 600; }
+.legal-section p { margin-top: 1rem; color: var(--muted-foreground); line-height: 1.85; overflow-wrap: anywhere; }
+.legal-section a { color: var(--glow-a); text-decoration: underline; text-underline-offset: 3px; }
+.legal-page a:focus-visible, .site-footer a:focus-visible { outline: 2px solid var(--glow-a); outline-offset: 5px; border-radius: 3px; }
+.site-footer { padding: 2.5rem 1rem 1.5rem; border-top: 1px solid var(--border); color: var(--muted-foreground); font-size: .8rem; }
+.site-footer__inner { max-width: 72rem; margin: 0 auto; }
+.site-footer__top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+.site-footer__links { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; }
+.site-footer a:hover { color: var(--foreground); }
+.site-footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+.site-footer__credit a { color: var(--foreground); text-decoration: underline; text-underline-offset: 4px; }

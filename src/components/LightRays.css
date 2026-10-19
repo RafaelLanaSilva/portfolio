@@ -1,0 +1,55 @@
+.hero-rays {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(#000 0%, #000 60%, transparent 100%);
+}
+
+.hero-rays__fan {
+  position: absolute;
+  top: -14rem;
+  left: 72%;
+  width: 150rem;
+  height: 150rem;
+  transform-origin: 50% 0%;
+  translate: -50% 0;
+  background: conic-gradient(from 110deg at 50% 0%,
+    transparent 0deg, rgb(0 217 223 / 3%) 11deg,
+    rgb(0 217 223 / 19%) 15deg, transparent 20deg,
+    transparent 27deg, rgb(39 216 205 / 12%) 32deg, transparent 39deg,
+    transparent 48deg, rgb(0 217 223 / 17%) 53deg, transparent 61deg,
+    transparent 69deg, rgb(0 217 223 / 10%) 74deg, transparent 83deg);
+  filter: blur(14px);
+  animation: hero-ray-drift 18s ease-in-out infinite alternate;
+}
+
+.hero-rays__fan--secondary {
+  opacity: .5;
+  rotate: -14deg;
+  animation-duration: 25s;
+  animation-direction: alternate-reverse;
+}
+
+.hero-rays__source {
+  position: absolute;
+  top: -12rem;
+  left: 50%;
+  width: 38rem;
+  height: 28rem;
+  background: radial-gradient(ellipse, rgb(0 223 213 / 15%), transparent 65%);
+}
+
+@keyframes hero-ray-drift {
+  from { transform: rotate(-8deg); opacity: .55; }
+  to { transform: rotate(9deg); opacity: 1; }
+}
+
+@media (max-width: 767px) {
+  .hero-rays__fan { width: 90rem; height: 110rem; filter: blur(9px); }
+  .hero-rays__fan--secondary { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rays__fan { animation: none; transform: rotate(-3deg); opacity: .6; }
+}

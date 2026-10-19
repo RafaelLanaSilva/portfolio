@@ -1,0 +1,115 @@
+/* Full-width section backgrounds, independent of the content containers. */
+.section-band {
+  position: relative;
+  isolation: isolate;
+  border-top: 1px solid rgb(255 255 255 / 7%);
+}
+
+.section-band::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -1px;
+  left: 12%;
+  width: 76%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--section-accent, var(--glow-a)), transparent);
+  opacity: .35;
+  pointer-events: none;
+}
+
+.section-band > section {
+  position: relative;
+  padding-top: clamp(4.5rem, 8vw, 7rem);
+  padding-bottom: clamp(4.5rem, 8vw, 7rem);
+}
+
+section[id] { scroll-margin-top: 6.5rem; }
+
+.section-band--services {
+  background: radial-gradient(ellipse at 0% 10%, rgb(0 207 206 / 4%), transparent 50%), #090b0d;
+}
+
+.section-band--services .service-card {
+  background: linear-gradient(145deg, rgb(255 255 255 / 4%), rgb(255 255 255 / 1.5%));
+}
+
+.section-band--process {
+  background: radial-gradient(ellipse at 90% 0%, rgb(0 207 206 / 8%), transparent 65%), #11191c;
+}
+
+.section-band--process::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: radial-gradient(rgb(158 215 216 / 13%) .75px, transparent .75px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(90deg, transparent 30%, #000);
+  pointer-events: none;
+}
+
+.section-band--process h2 { max-width: 35rem; }
+.section-band--process .bg-background { background-color: #11191c; }
+
+.section-band--portfolio {
+  --section-accent: var(--glow-b);
+  background: radial-gradient(ellipse at 100% 45%, rgb(217 183 94 / 5%), transparent 55%), #090b0e;
+}
+
+.section-band--portfolio .case-card { background: #111518; }
+
+.section-band--estimator {
+  --section-accent: var(--glow-c);
+  background: linear-gradient(125deg, #101b1e, #10201e 60%, #171b17);
+}
+
+.section-band--estimator > section { padding-block: clamp(3.5rem, 6vw, 5rem); }
+.section-band--estimator .glass {
+  border-color: rgb(111 218 195 / 20%);
+  background: linear-gradient(130deg, rgb(255 255 255 / 4%), rgb(255 255 255 / 1%));
+  box-shadow: 0 24px 80px -45px #000;
+}
+
+.section-band--faq { background: #101216; }
+.section-band--faq::before { opacity: .16; }
+.section-band--faq button { gap: 1.25rem; }
+
+.section-band--contact {
+  background: radial-gradient(ellipse at 12% 80%, rgb(0 211 206 / 13%), transparent 60%),
+    radial-gradient(ellipse at 100% 5%, rgb(206 176 84 / 7%), transparent 50%), #0a161a;
+}
+
+.section-band--contact::before {
+  left: 0;
+  width: 100%;
+  height: 2px;
+  opacity: .7;
+  background: linear-gradient(90deg, transparent, var(--glow-a), var(--glow-c), var(--glow-b), transparent);
+  background-size: 200% 100%;
+  animation: section-light 12s ease-in-out infinite alternate;
+}
+
+.section-band--contact form.glass {
+  background: rgb(8 18 22 / 78%);
+  border-color: rgb(138 211 203 / 18%);
+  box-shadow: 0 24px 60px -35px #000;
+}
+
+.section-band--contact input,
+.section-band--contact select,
+.section-band--contact textarea { min-width: 0; }
+
+.site-footer { background: #080b0d; }
+
+@keyframes section-light { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+
+@media (max-width: 767px) {
+  .section-band--contact form { padding: 1.5rem; }
+  .section-band--contact h2 { font-size: clamp(2.5rem, 10vw, 3rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-band--contact::before { animation: none; }
+  html { scroll-behavior: auto; }
+}
