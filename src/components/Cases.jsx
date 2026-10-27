@@ -10,7 +10,7 @@ const casesData = [
     tag: 'Site Institucional',
     displayUrl: 'fqmengenharia.com',
     url: 'https://fqmengenharia.com/',
-    image: '/projects/fqm.png',
+    image: `${import.meta.env.BASE_URL}projects/fqm.png`,
     description:
       'Site institucional para escritório de arquitetura e engenharia. Apresentação técnica de projetos estruturais, elétricos, PPCI e planejamento com metodologia BIM.',
     tags: ['Arquitetura & Engenharia', 'Metodologia BIM', 'Responsivo'],
@@ -21,7 +21,7 @@ const casesData = [
     tag: 'Site Institucional',
     displayUrl: 'iampulseiras.com',
     url: 'https://iampulseiras.com/',
-    image: '/projects/iam-institucional.png',
+    image: `${import.meta.env.BASE_URL}projects/iam-institucional.png`,
     description:
       'Site institucional para fábrica e personalização de pulseiras. Catálogo interativo de produtos, apresentação de modelos e direcionamento direto para orçamentos via WhatsApp.',
     tags: ['Catálogo de Produtos', 'Fábrica & Vendas', 'Integração WhatsApp'],
@@ -32,7 +32,7 @@ const casesData = [
     tag: 'Landing Page',
     displayUrl: 'iampulseiras.com/pulseiras...',
     url: 'https://iampulseiras.com/pulseiras-personalizadas/',
-    image: '/projects/iam-lp.png',
+    image: `${import.meta.env.BASE_URL}projects/iam-lp.png`,
     description:
       'Landing page estratégica de alta conversão. Simulador de gravação em tempo real, prova social, tabela de benefícios e captação rápida de leads.',
     tags: ['Alta Conversão', 'Simulador em Tempo Real', 'Captação de Leads'],
