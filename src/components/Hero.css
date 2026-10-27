@@ -1,0 +1,43 @@
+.hero-content {
+  width: 100%;
+  min-width: 0;
+}
+
+.hero-typewriter__word {
+  white-space: nowrap;
+}
+
+.hero-typewriter__character {
+  position: relative;
+}
+
+.hero-typewriter__character[data-cursor]::after {
+  content: '';
+  position: absolute;
+  top: 0.12em;
+  left: calc(100% + 0.025em);
+  width: 0.025em;
+  height: 0.8em;
+  background: var(--glow-a);
+  visibility: visible;
+  animation: hero-cursor-blink 0.7s step-end infinite;
+  pointer-events: none;
+}
+
+.hero-typewriter__character[data-cursor='before']::after {
+  left: 0;
+}
+
+@keyframes hero-cursor-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-typewriter__character {
+    visibility: visible !important;
+  }
+
+  .hero-typewriter__character[data-cursor]::after {
+    display: none;
+  }
+}

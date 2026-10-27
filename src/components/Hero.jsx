@@ -1,11 +1,72 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { easeCustom, MagneticButton } from './Shared';
 import LightRays from './LightRays';
+import './Hero.css';
+
+const headline = 'Marcas que convertem,código que escala.';
+
+function typedText(text, offset, visibleCount) {
+  let position = offset;
+  return text.split(/(\s+)/).map((word, wordIndex) => (
+    <span key={wordIndex} className={word.trim() ? 'hero-typewriter__word' : undefined}>
+      {Array.from(word).map((character) => {
+        const index = position++;
+        const cursor = visibleCount < headline.length && (
+          visibleCount === index + 1 ? 'after' : visibleCount === 0 && index === 0 ? 'before' : undefined
+        );
+        return (
+          <span
+            key={index}
+            className="hero-typewriter__character"
+            style={{ visibility: index < visibleCount ? 'visible' : 'hidden' }}
+            data-cursor={cursor || undefined}
+          >
+            {character}
+          </span>
+        );
+      })}
+    </span>
+  ));
+}
 
 export default function Hero() {
   const [mouse, setMouse] = useState({ x: 50, y: 40 });
+  const [typedCount, setTypedCount] = useState(0);
+  const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    let count = 0;
+    let timer;
+    let cancelled = false;
+    const typeNextCharacter = () => {
+      count += 1;
+      setTypedCount(count);
+      if (count < headline.length) {
+        timer = window.setTimeout(typeNextCharacter, headline[count - 1] === ',' ? 320 : 55);
+      }
+    };
+    // Start only after the headline font settles, so its words cannot reflow
+    // from the fallback font to Geist halfway through typing.
+    const startTyping = async () => {
+      try {
+        await document.fonts.load('600 96px "Geist"', headline);
+        await document.fonts.ready;
+      } catch {
+        // A failed font download still leaves the system font usable.
+      }
+      if (!cancelled) timer = window.setTimeout(typeNextCharacter, 650);
+    };
+    startTyping();
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [reducedMotion]);
+
+  const visibleCount = reducedMotion ? headline.length : typedCount;
 
   return (
     <section
@@ -27,7 +88,7 @@ export default function Hero() {
       <LightRays />
       <div className="pointer-events-none absolute inset-0 opacity-[0.15] [background-image:linear-gradient(var(--border)_1px,transparent_1px),linear-gradient(90deg,var(--border)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
 
-      <div className="relative mx-auto max-w-6xl">
+      <div className="hero-content relative mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -45,11 +106,18 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.1, ease: easeCustom }}
-          className="mt-8 max-w-5xl text-5xl font-semibold leading-[0.95] tracking-tighter sm:text-7xl md:text-8xl"
+          className="hero-typewriter mt-8 max-w-5xl text-5xl font-semibold leading-[0.95] tracking-tighter sm:text-7xl md:text-8xl"
+          aria-label="Marcas que convertem, código que escala."
         >
-          Marcas que <span className="text-gradient">convertem</span>,
-          <br />
-          código que escala.
+          <span aria-hidden="true">
+            {typedText('Marcas que ', 0, visibleCount)}
+            <span className="hero-typewriter__word">
+              <span className="text-gradient">{typedText('convertem', 11, visibleCount)}</span>
+              {typedText(',', 20, visibleCount)}
+            </span>
+            <br />
+            {typedText('código que escala.', 21, visibleCount)}
+          </span>
         </motion.h1>
 
         <motion.p
